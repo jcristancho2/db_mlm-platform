@@ -1,7 +1,8 @@
 
 CREATE DATABASE mlm_platform;
 
-USE mlm-platforml;
+USE mlm_platform;
+
 
 CREATE TABLE IF NOT EXISTS countries (
     isocode VARCHAR(6) PRIMARY KEY,
@@ -27,7 +28,7 @@ CREATE TABLE IF NOT EXISTS stateregions (
 
 CREATE TABLE IF NOT EXISTS citiesormunicipalities (
     code VARCHAR(6) PRIMARY KEY,
-    name VARCHAR(60) UNIQUE,
+    name VARCHAR(100) UNIQUE,
     statereg_id VARCHAR(6),
     FOREIGN KEY (statereg_id) REFERENCES stateregions(code)
 );
