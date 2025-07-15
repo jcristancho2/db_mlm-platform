@@ -1422,111 +1422,416 @@ VALUES
 
 INSERT INTO typesidentifications (id, description, sufix)
 VALUES 
-(1, , ...)
-(2, , ...)
-(3, ..., ...)
+('1','Registro Civil de Nacimiento','RC'),
+('2','Tarjeta de Identidad','TI'),
+('3','Cédula de Ciudadanía','CC'),
+('4','Cédula de Extranjería','CE'),
+('5','Tarjeta de Extranjería','TE'),
+('6','Número de Identificación Tributaria','NIT'),
+('7','Pasaporte','PA'),
+('8','Permiso Especial de Permanencia','PEP'),
+('9','Permiso por Protección Temporal','PPT'),
+('10','Adulto Sin Identificación','AS'),
+('11','Menor Sin Identificación','MS'),
+('12','Carné Diplomático','CD'),
+('13','Salvoconducto','SC'),
+('14','Documento de Identificación Extranjero','DE');
+
+
+
 -- audiences
 
 INSERT INTO audiences (id, description)
-VALUES (..., ...);
+VALUES
+(1, 'Jóvenes emprendedores'),
+(2, 'Profesionales'),
+(3, 'Adultos mayores');
 
 -- categories
 
 INSERT INTO categories (id, description)
-VALUES (..., ...);
+VALUES 
+(1, 'Periféricos y Accesorios de Computo'),
+(2, 'Monitores y Pantallas'),
+(3, 'Muebles y Ergonomía'),
+(4, 'Redes y Comunicaciones'),
+(5, 'Almacenamiento y Dispositivos Portátiles'),
+(6, 'Audio y Video'),
+(7, 'Computadores y Portátiles'),
+(8, 'Electrodomésticos para el Hogar'),
+(9, 'Electrodomésticos Inteligentes'),
+(10, 'Tecnología Wearable'),
+(11, 'Software Empresarial'),
+(12, 'Equipos Industriales y de Construcción'),
+(13, 'Agricultura y Medio Ambiente'),
+(14, 'Seguridad y Vigilancia'),
+(15, 'Herramientas Profesionales y EPP'),
+(16, 'Energía y Suministro Eléctrico'),
+(17, 'Diseño, Topografía y Drones'),
+(18, 'Redes Empresariales y Seguridad Informática');
+
 
 -- companies
 
-INSERT INTO companies (id, type_id, name, category_id, city_id, audience_id, cellphone, email)
-VALUES (..., ..., ..., ..., ..., ..., ..., ...);
+INSERT INTO companies (id, type_id, name, category_id, city_id, audience_id, cellphone, email) VALUES
+('CMP016', 6, 'Logística Amazonia S.A.S', 2, '91001', 1, '3257677789', 'contacto@amazonia.com'),
+('CMP017', 3, 'AgroIndustrias Antioquia', 1, '05001', 2, '3268788890', 'ventas@agroantioquia.com'),
+('CMP018', 7, 'Construcciones Llanos Ltda', 3, '81001', 3, '3279899901', 'info@construccionesllanos.com'),
+('CMP019', 1, 'Inversiones Caribe S.A.', 2, '08001', 1, '3281011123', 'contacto@inversionescaribe.com'),
+('CMP020', 2, 'Comercializadora Bolivar', 1, '13001', 2, '3292122234', 'ventas@comercializadorabolivar.com'),
+('CMP021', 6, 'Distribuciones Andinas Boyacá', 3, '15001', 3, '3003233345', 'distribuciones@boyaca.com'),
+('CMP022', 3, 'Servicios Cafeteros Caldas', 2, '17001', 1, '3014344456', 'info@cafeteroscaldas.com'),
+('CMP023', 7, 'Transportes Selva SAS', 1, '18001', 2, '3025455567', 'transportes@selva.com'),
+('CMP024', 5, 'Ganadería Casanare Ltda', 3, '85001', 3, '3036566678', 'ganaderia@casanare.com'),
+('CMP025', 6, 'Artesanías Cauca SAS', 2, '19001', 1, '3047677789', 'ventas@artesaniascauca.com'),
+('CMP026', 3, 'AgroCesar S.A.', 1, '20001', 2, '3058788890', 'agro@cesar.com'),
+('CMP027', 7, 'Comercio Pacífico Chocó', 3, '27001', 3, '3069899901', 'contacto@pacificochoco.com'),
+('CMP028', 1, 'Urbanizaciones Cundinamarca', 2, '25001', 1, '3071011123', 'info@urbancundinamarca.com'),
+('CMP029', 2, 'Lácteos Córdoba SAS', 1, '23001', 2, '3082122234', 'ventas@lacteoscordoba.com'),
+('CMP030', 6, 'Tecnología Capital S.A.S', 3, '11001', 3, '3093233345', 'contacto@tecnologiacapital.com'), -- Bogotá D.C.
+('CMP031', 3, 'Minería Guainía Ltda', 2, '94001', 1, '3104344456', 'mineria@guainia.com'),
+('CMP032', 7, 'Turismo Guaviare SAS', 1, '95001', 2, '3115455567', 'turismo@guaviare.com'),
+('CMP033', 5, 'Cafés del Huila S.A.', 3, '41001', 3, '3126566678', 'cafes@huila.com'),
+('CMP034', 6, 'Comercial La Guajira', 2, '44001', 1, '3137677789', 'comercial@laguajira.com'),
+('CMP035', 3, 'Pesquera Magdalena Ltda', 1, '47001', 2, '3148788890', 'info@pesqueramagdalena.com'),
+('CMP036', 7, 'Petróleo Meta SAS', 3, '50001', 3, '3159899901', 'petroleo@meta.com'),
+('CMP037', 1, 'Cultivos Nariño S.A.', 2, '52001', 1, '3161011123', 'cultivos@narino.com'),
+('CMP038', 2, 'Modas Santander Norte', 1, '54001', 2, '3172122234', 'modas@santandernorte.com'),
+('CMP039', 6, 'Flores Putumayo SAS', 3, '86001', 3, '3183233345', 'flores@putumayo.com'),
+('CMP040', 3, 'Bienes Raíces Quindío', 2, '63001', 1, '3194344456', 'bienesraices@quindio.com'),
+('CMP041', 7, 'Servicios Risaralda S.A.', 1, '66001', 2, '3005455567', 'servicios@risaralda.com'),
+('CMP042', 5, 'Dulces San Andrés', 3, '88001', 3, '3016566678', 'dulces@sanandres.com'),
+('CMP043', 6, 'Textiles Santander Ltda', 2, '68001', 1, '3027677789', 'textiles@santander.com'),
+('CMP044', 3, 'Arroces Sucre SAS', 1, '70001', 2, '3038788890', 'arroces@sucre.com'),
+('CMP045', 7, 'Inversiones Tolima', 3, '73001', 3, '3049899901', 'inversiones@tolima.com'),
+('CMP046', 1, 'Tecnología Valle S.A.S', 2, '76001', 1, '3051011123', 'tecnologia@valle.com'),
+('CMP047', 2, 'Ecoturismo Vaupés', 1, '97001', 2, '3062122234', 'ecoturismo@vaupes.com'),
+('CMP048', 6, 'Comercializadora Vichada', 3, '99001', 3, '3073233345', 'comercializadora@vichada.com');
 
 -- customers
 
-INSERT INTO customers (id, name, city_id, audience_id, cellphone, email, address)
-VALUES (..., ..., ..., ..., ..., ..., ...);
+INSERT INTO customers (id, name, city_id, audience_id, cellphone, email, address) VALUES
+(21, 'Sofía Giraldo', '08001', 1, '3201122334', 'sgiraldo@email.com', 'Calle 7 #12-34'),
+(22, 'Ricardo Vega', '17001', 3, '3212233445', 'rvega@email.com', 'Cra 2 #56-78'),
+(23, 'Elena Castro', '18001', 2, '3223344556', 'ecastro@email.com', 'Av. 5 #90-11'),
+(24, 'Gabriel Osorio', '19001', 1, '3234455667', 'gosorio@email.com', 'Carrera 15 #23-45'),
+(25, 'Valeria Díaz', '20001', 3, '3245566778', 'vdiaz@email.com', 'Diagonal 8 #67-89'),
+(26, 'Samuel Quintero', '23001', 2, '3256677889', 'squintero@email.com', 'Callejon 3 #10-21'),
+(27, 'Mariana Rojas', '25001', 1, '3267788990', 'mrojas@email.com', 'Transversal 7 #34-56'),
+(28, 'Alejandro Vargas', '27001', 3, '3278899001', 'avargas@email.com', 'Avenida Principal #78-90'),
+(29, 'Andrea Mendoza', '41001', 2, '3289900112', 'amendoza@email.com', 'Circular 1 #22-33'),
+(30, 'Fernando Ortiz', '44001', 1, '3290011223', 'fortiz@email.com', 'Boulevard 9 #45-67'),
+(31, 'Natalia Franco', '47001', 3, '3001122334', 'nfranco@email.com', 'Manzana 4 #88-99'),
+(32, 'Sebastián Guzmán', '52001', 2, '3012233445', 'sguzman@email.com', 'Lote 12 #56-78'),
+(33, 'Carolina Herrera', '54001', 1, '3023344556', 'cherrera@email.com', 'Vereda El Carmen #123'),
+(34, 'Cristian Mora', '63001', 3, '3034455667', 'cmora@email.com', 'Barrio La Paz #45-67'),
+(35, 'Valeria Pinzón', '66001', 2, '3045566778', 'vpinzon@email.com', 'Sector Industrial #8-90'),
+(36, 'Julián Castro', '70001', 1, '3056677889', 'jcastro@email.com', 'Condominio Campestre #5'),
+(37, 'Ana María Soto', '73001', 3, '3067788990', 'amsoto@email.com', 'Conjunto Residencial #3-21'),
+(38, 'Daniel Beltrán', '81001', 2, '3078899001', 'dbeltran@email.com', 'Granja San Isidro #1'),
+(39, 'Laura Benítez', '85001', 1, '3089900112', 'lbenitez@email.com', 'Parcela 7 #33-44'),
+(40, 'Pedro Jiménez', '88001', 3, '3090011223', 'pjimenez@email.com', 'Isla Providencia #77-88');
+
 
 -- favorites
 
 INSERT INTO favorites (id, customer_id, company_id)
-VALUES (..., ..., ...);
+VALUES 
+(1, 1, 1),
+(2, 2, 3),
+(3, 3, 2),
+(4, 4, 1),
+(5, 5, 4),
+(6, 6, 5),
+(7, 7, 2),
+(8, 8, 4),
+(9, 9, 3),
+(10, 10, 5),
+(11, 3, 1),
+(12, 6, 2),
+(13, 7, 3),
+(14, 2, 4),
+(15, 5, 5);
+
 
 -- details_favorites
 
 INSERT INTO details_favorites (favorite_id, product_id)
-VALUES (..., ...);
+VALUES 
+(1, 2),
+(1, 5),
+(2, 7),
+(2, 12),
+(3, 9),
+(3, 14),
+(4, 1),
+(4, 18),
+(5, 20),
+(5, 25),
+(6, 33),
+(6, 8),
+(7, 6),
+(7, 11),
+(8, 3),
+(8, 27),
+(9, 4),
+(9, 17),
+(10, 31),
+(10, 29),
+(11, 16),
+(12, 19),
+(13, 26),
+(14, 22),
+(15, 35);
+
 
 -- products
 
-INSERT INTO products (id, name, detail, price, category_id, image)
-VALUES (..., ..., ..., ..., ..., ...);
-
+INSERT INTO products (id, name, detail, price, category_id, image) VALUES
+(1, 'Teclado Gamer Mecánico RGB', 'Teclado retroiluminado con switches Cherry MX', 159.99, 1, 'image1.jpg'),
+(2, 'Monitor LED 24" Full HD', 'Pantalla IPS con resolución 1920x1080 y puertos HDMI/DisplayPort', 499.50, 2, 'image2.jpg'),
+(3, 'Silla Ergonómica Ejecutiva', 'Silla de oficina con soporte lumbar ajustable y reposacabezas', 289.00, 3, 'image3.jpg'),
+(4, 'Router Wi-Fi 6 AX3000', 'Conexión de alta velocidad y cobertura extendida para el hogar', 199.99, 1, 'image4.jpg'),
+(5, 'Disco Duro Externo SSD 1TB', 'Almacenamiento portátil de estado sólido USB-C 3.2 Gen2', 99.90, 2, 'image5.jpg'),
+(6, 'Auriculares Bluetooth con ANC', 'Diadema inalámbrica con cancelación activa de ruido y 30h batería', 129.00, 3, 'image6.jpg'),
+(7, 'Webcam 4K Ultra HD', 'Cámara web con micrófono estéreo para streaming y videoconferencias', 89.99, 1, 'image7.jpg'),
+(8, 'Laptop Ultrabook 15.6"', 'Intel i7, 16GB RAM, 512GB SSD, pantalla táctil', 1650.75, 2, 'image8.jpg'),
+(9, 'Mouse Vertical Ergonómico', 'Diseño para reducir tensión en la muñeca, DPI ajustable', 49.99, 3, 'image9.jpg'),
+(10, 'Cámara de Seguridad Exterior 1080p', 'Resistente al agua, visión nocturna a color, detección IA', 220.00, 1, 'image10.jpg'),
+(11, 'Tableta Gráfica con Pantalla', '16 pulgadas, 8192 niveles de presión, ideal para profesionales', 310.00, 2, 'image11.jpg'),
+(12, 'Horno Microondas Integrable', '25 litros, función convección y grill, panel táctil', 450.99, 3, 'image12.jpg'),
+(13, 'Licuadora de Alta Potencia', '1500W, vaso de tritán irrompible, programas preestablecidos', 375.00, 1, 'image13.jpg'),
+(14, 'Aire Acondicionado Split Inverter', '12000 BTU, eficiencia energética A+++, control Wi-Fi', 1250.00, 2, 'image14.jpg'),
+(15, 'Smartwatch Deportivo GPS', 'Monitoreo de frecuencia cardíaca, oxígeno en sangre, pagos NFC', 279.99, 3, 'image15.jpg'),
+(16, 'TV LED 55" 4K UHD Smart TV', 'Procesador inteligente, Google TV integrado, HDR10+', 1850.00, 1, 'image16.jpg'),
+(17, 'Parlante Bluetooth Portátil', 'Impermeable, 20W de potencia, 15 horas de batería', 135.75, 2, 'image17.jpg'),
+(18, 'Cafetera Superautomática', 'Muele grano, prepara capuccino y latte macchiato, pantalla táctil', 399.00, 3, 'image18.jpg'),
+(19, 'Refrigerador No Frost 300L', 'Eficiencia energética A+, dispensador de agua, zona convertible', 2100.00, 1, 'image19.jpg'),
+(20, 'Cámara Réflex Digital DSLR', '24MP, video 4K, lente 18-55mm, conectividad Wi-Fi', 3200.00, 2, 'image20.jpg'),
+(21, 'Software de Gestión Logística Integral', 'Plataforma avanzada para optimización de cadenas de suministro y distribución.', 4500.00, 1, 'image21.jpg'),
+(22, 'Máquina de Soldadura por Arco Industrial', 'Equipo de alta resistencia para soldadura MIG/MAG en entornos industriales.', 890.50, 2, 'image22.jpg'),
+(23, 'Sistema de Riego Automático Inteligente', 'Kit completo con sensores de humedad y programación Wi-Fi para jardines y cultivos.', 1200.00, 3, 'image23.jpg'),
+(24, 'Baterías de Litio para Almacenamiento Solar', 'Módulos de baterías de alta capacidad para sistemas de energía fotovoltaica.', 750.00, 1, 'image24.jpg'),
+(25, 'Compostador Urbano para Residuos Orgánicos', 'Diseño compacto y eficiente para la gestión de residuos en el hogar o pequeña empresa.', 1500.00, 2, 'image25.jpg'),
+(26, 'Kit de Análisis de Suelo para Agricultura', 'Equipos portátiles para determinar nutrientes y pH del suelo en campo.', 620.00, 3, 'image26.jpg'),
+(27, 'Sembradora de Precisión para Hortalizas', 'Maquinaria agrícola para siembra eficiente de semillas pequeñas.', 18500.00, 1, 'image27.jpg'),
+(28, 'Contenedores de Almacenamiento Refrigerados', 'Unidades móviles para el transporte y conservación de productos perecederos.', 3500.00, 2, 'image28.jpg'),
+(29, 'Equipo de Protección Personal (EPP) Industrial', 'Cascos, guantes, gafas de seguridad y calzado para ambientes laborales.', 980.00, 3, 'image29.jpg'),
+(30, 'Bombas de Vacío para Procesos Industriales', 'Equipos de alto rendimiento para aplicaciones de vacío en manufactura.', 1100.00, 1, 'image30.jpg'),
+(31, 'Software BIM para Diseño de Edificios', 'Herramienta de modelado de información de construcción para arquitectos e ingenieros.', 7800.00, 2, 'image31.jpg'),
+(32, 'Drones para Topografía y Mapeo', 'Drones con GPS RTK y cámaras de alta resolución para levantamientos topográficos.', 4200.00, 3, 'image32.jpg'),
+(33, 'Nutrientes Hidropónicos Avanzados (Set)', 'Fórmulas concentradas para cultivos sin suelo, mejora el crecimiento vegetal.', 120.00, 1, 'image33.jpg'),
+(34, 'Sistemas de Ventilación Industrial Inteligente', 'Control climático automatizado y filtración de aire para grandes espacios.', 2900.00, 2, 'image34.jpg'),
+(35, 'Switch de Red Gigabit Gestionable', 'Conmutador de 24 puertos para infraestructura de red empresarial de alto rendimiento.', 850.00, 3, 'image35.jpg'),
+(36, 'Firewall de Nueva Generación (NGFW)', 'Dispositivo de seguridad perimetral con prevención de intrusiones y filtrado de contenido.', 1500.00, 1, 'image36.jpg'),
+(37, 'Cortadora Láser CNC de Metales', 'Máquina de corte de precisión para fabricación industrial, alta velocidad.', 1700.00, 2, 'image37.jpg'),
+(38, 'Estación de Carga Eléctrica para Vehículos', 'Punto de recarga rápida para autos eléctricos y flotas comerciales.', 380.00, 3, 'image38.jpg'),
+(39, 'Kit de Primeros Auxilios Industrial (Completo)', 'Botiquín de emergencia con suministros para grandes empresas y obras.', 75.00, 1, 'image39.jpg'),
+(40, 'Generador Eléctrico de Emergencia (Diesel)', 'Capacidad de 100 kVA para respaldo energético en caso de cortes de suministro.', 950.00, 2, 'image40.jpg');
 -- unitofmeasure
 
 INSERT INTO unitofmeasure (id, description)
-VALUES (..., ...);
+VALUES 
+(1, 'Unidad'),
+(2, 'Caja'),
+(3, 'Paquete'),
+(4, 'Litro'),
+(5, 'Metro');
+
 
 -- companyproducts
 
 INSERT INTO companyproducts (company_id, product_id, price, unitmeasure_id)
-VALUES (..., ..., ..., ...);
+VALUES 
+(2, 1, 1054.33, 1),
+(1, 2, 1372.33, 1),
+(1, 3, 2466.25, 3),
+(5, 4, 1768.53, 3),
+(2, 5, 2233.35, 5),
+(5, 6, 1043.95, 1),
+(3, 7, 1734.23, 1),
+(5, 8, 732.25, 5),
+(3, 9, 549.76, 1),
+(2, 10, 2637.26, 4),
+(1, 11, 839.11, 4),
+(3, 12, 448.08, 4),
+(3, 13, 1198.54, 4),
+(2, 14, 1256.04, 4),
+(2, 15, 1068.21, 2),
+(1, 16, 2492.75, 5),
+(2, 17, 111.22, 5),
+(2, 18, 971.13, 1),
+(3, 19, 830.05, 4),
+(4, 20, 1097.57, 1);
+
 
 -- polls
 
 INSERT INTO polls (id, name)
-VALUES (..., ...);
+VALUES 
+(1, 'Encuesta Satisfacción Clientes'),
+(2, 'Preferencias de Productos'),
+(3, 'Calidad del Servicio');
+
 
 -- categories_polls
 
 INSERT INTO categories_polls (id, name)
-VALUES (..., ...);
+VALUES 
+(1, 'Electrónica'),
+(2, 'Hogar y Cocina'),
+(3, 'Industria y Construcción'),
+(4, 'Agricultura');
+
 
 -- polls_companies
 
 INSERT INTO polls_companies (company_id, poll_id)
-VALUES (..., ...);
+VALUES 
+(1, 1),
+(1, 2),
+(2, 3);
+
 
 -- pollproducts
 
 INSERT INTO pollproducts (poll_id, product_id)
-VALUES (..., ...);
+VALUES 
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(2, 6),
+(2, 7),
+(2, 8),
+(2, 9),
+(2, 10),
+(3, 11),
+(3, 12),
+(3, 13),
+(3, 14),
+(3, 15);
+
 
 -- customerpollratings
 
 INSERT INTO customerpollratings (customer_id, poll_id, daterating, rating)
-VALUES (..., ..., ..., ...);
+VALUES 
+(1, 1, '2025-07-10', 2),
+(2, 1, '2024-07-18', 3),
+(3, 1, '2024-02-09', 2),
+(4, 2, '2025-01-25', 3),
+(5, 3, '2023-06-13', 5),
+(6, 1, '2023-08-24', 2),
+(7, 3, '2023-03-12', 3),
+(8, 2, '2025-03-11', 2),
+(9, 1, '2023-08-29', 3),
+(10, 3, '2025-12-10', 1),
+(11, 3, '2024-05-13', 4),
+(12, 2, '2024-09-20', 5),
+(13, 3, '2024-05-03', 1),
+(14, 2, '2023-01-10', 5),
+(15, 3, '2025-02-05', 5);
+
 
 -- category_poll_links
 
 INSERT INTO category_poll_links (company_id, categorypoll_id, poll_id, daterating, rating)
-VALUES (..., ..., ..., ..., ...);
+VALUES 
+(1, 4, 3, '2024-10-11', 4),
+(4, 4, 3, '2024-03-01', 1),
+(1, 1, 3, '2024-08-20', 1),
+(4, 2, 2, '2023-09-17', 1),
+(3, 2, 2, '2025-08-17', 1),
+(2, 4, 3, '2024-11-26', 3),
+(5, 1, 2, '2024-11-07', 5),
+(1, 1, 1, '2023-05-12', 3),
+(3, 2, 3, '2025-12-09', 1),
+(5, 3, 1, '2024-07-22', 3),
+(3, 4, 3, '2025-07-16', 4),
+(5, 3, 1, '2023-08-19', 5),
+(1, 4, 2, '2023-02-12', 5),
+(4, 3, 1, '2024-01-10', 2),
+(4, 1, 1, '2024-09-15', 1);
 
 -- memberships
 
 INSERT INTO memberships (id, name, description)
-VALUES (..., ..., ...);
+VALUES 
+(1, 'Básica', 'Acceso limitado a contenido'),
+(2, 'Premium', 'Acceso completo a contenido y beneficios'),
+(3, 'Empresarial', 'Beneficios para empresas y estadísticas');
+
 
 -- periods
 
 INSERT INTO periods (id, name)
-VALUES (..., ...);
+VALUES 
+(1, 'Semanal'),
+(2, 'Quincenal'),
+(3, 'Mensual'),
+(4, 'Trimestral'),
+(5, 'Anual');
+
 
 -- membershipperiods
 
 INSERT INTO membershipperiods (membership_id, period_id, price)
-VALUES (..., ..., ...);
+VALUES 
+(1, 1, 177.34),
+(1, 2, 151.40),
+(1, 3, 187.51),
+(2, 1, 129.66),
+(2, 2, 128.49),
+(2, 3, 89.64),
+(3, 1, 197.18),
+(3, 2, 112.52),
+(3, 3, 93.22);
+
 
 -- benefits
 
 INSERT INTO benefits (id, description, detail)
-VALUES (..., ..., ...);
+VALUES 
+(1, 'Acceso a promociones', 'Descuentos exclusivos en productos seleccionados'),
+(2, 'Envío gratuito', 'Envío sin costo en compras mayores a cierto monto'),
+(3, 'Atención prioritaria', 'Soporte al cliente preferencial'),
+(4, 'Reportes detallados', 'Estadísticas y análisis avanzados para negocios');
+
 
 -- membershipbenefits
 
 INSERT INTO membershipbenefits (membership_id, benefit_id)
-VALUES (..., ...);
+VALUES 
+(1, 1),
+(2, 1),
+(2, 2),
+(2, 3),
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 4);
+
 
 -- audiencebenefits
 
 INSERT INTO audiencebenefits (audience_id, benefit_id)
-VALUES (..., ...);
+VALUES 
+(1, 4),
+(2, 4),
+(3, 1),
+(4, 4),
+(5, 1),
+(6, 1),
+(7, 2),
+(8, 2),
+(9, 4),
+(10, 2),
+(11, 3),
+(12, 2),
+(13, 4),
+(14, 3),
+(15, 2);
+
 

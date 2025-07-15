@@ -1,5 +1,5 @@
 
-CREATE DATABASE mlm-platforml;
+CREATE DATABASE mlm_platform;
 
 USE mlm-platforml;
 
