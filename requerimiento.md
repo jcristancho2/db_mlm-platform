@@ -325,7 +325,7 @@ https://i.ibb.co/JwMnYkcr/DERPlat-Products.png
 
 ------
 
-## 🔹 **4. Procedimientos Almacenados**
+## 🔹 **4. Procedimientos Almacenados**s
 
 1. ### **1. Registrar una nueva calificación y actualizar el promedio**
 

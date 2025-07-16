@@ -15,7 +15,7 @@ GROUP BY cu.id
 ORDER BY total_calificaciones DESC
 LIMIT 5;
 
--- 3. Distribución de productos por categoría y unidad de medida
+-- 3. Distribución de productos por categoría y unidad de medida   revisar
 SELECT cat.description AS categoria, um.description AS unidad_medida, COUNT(cp.product_id) AS cantidad_productos
 FROM companyproducts cp
 JOIN products p ON cp.product_id = p.id
@@ -31,13 +31,13 @@ GROUP BY p.id
 HAVING promedio_producto > (SELECT AVG(rating) FROM customerpollratings);
 
 -- 5. Empresas que no han recibido ninguna calificación
-SELECT co.name AS empresa, co.email
+SELECT co.name AS empresa, co.email, cr.poll_id
 FROM companies co
 LEFT JOIN polls_companies pc ON co.id = pc.company_id
 LEFT JOIN customerpollratings cr ON pc.poll_id = cr.poll_id
 WHERE cr.poll_id IS NULL;
 
--- 6. Productos añadidos como favoritos por más de 10 clientes distintos
+-- 6. Productos añadidos como favoritos por más de 10 clientes distintos   revisar
 SELECT p.name AS producto, COUNT(DISTINCT f.customer_id) AS total_clientes
 FROM details_favorites df
 JOIN favorites f ON df.favorite_id = f.id
@@ -45,7 +45,7 @@ JOIN products p ON df.product_id = p.id
 GROUP BY p.id
 HAVING total_clientes > 10;
 
--- 7. Empresas activas por ciudad y categoría
+-- 7. Empresas activas por ciudad y categoría   revisar
 SELECT c.name AS ciudad, cat.description AS categoria, co.name AS empresa
 FROM companies co
 JOIN citiesormunicipalities c ON co.city_id = c.code
@@ -63,14 +63,14 @@ GROUP BY ci.name, p.id
 ORDER BY ci.name, total_calificaciones DESC
 LIMIT 10;
 
--- 9. Productos sin unidad de medida asignada
+-- 9. Productos sin unidad de medida asignada  revisar
 SELECT p.name AS producto, co.name AS empresa
 FROM companyproducts cp
 JOIN products p ON cp.product_id = p.id
 JOIN companies co ON cp.company_id = co.id
 WHERE cp.unitmeasure_id IS NULL;
 
--- 10. Planes de membresía sin beneficios registrados
+-- 10. Planes de membresía sin beneficios registrados  revisar
 SELECT m.name AS membresia
 FROM memberships m
 LEFT JOIN membershipbenefits mb ON m.id = mb.membership_id
@@ -80,7 +80,7 @@ WHERE mb.benefit_id IS NULL;
 SELECT p.name AS producto, AVG(cr.rating) AS promedio_calificacion
 FROM products p
 JOIN customerpollratings cr ON cr.poll_id IN (SELECT poll_id FROM pollproducts WHERE product_id = p.id)
-WHERE p.category_id = ? -- Reemplaza ? por el id de la categoría deseada
+WHERE p.category_id = 2 -- Reemplaza ? por el id de la categoría deseada
 GROUP BY p.id;
 
 -- 12. Clientes que han comprado productos de más de una empresa
@@ -92,14 +92,14 @@ JOIN companyproducts cp ON df.product_id = cp.product_id
 GROUP BY cu.id
 HAVING empresas_distintas > 1;
 
--- 13. Ciudades con más clientes activos
+-- 13. Ciudades con más clientes activos    revisar adicionar mas clientes
 SELECT c.name AS ciudad, COUNT(cu.id) AS clientes_activos
 FROM citiesormunicipalities c
 JOIN customers cu ON cu.city_id = c.code
 GROUP BY c.code
 ORDER BY clientes_activos DESC;
 
--- 14. Ranking de productos por empresa basado en la media de quality_products
+-- 14. Ranking de productos por empresa basado en la media de quality_products    revisar
 SELECT co.name AS empresa, p.name AS producto, AVG(qp.quality_score) AS promedio_calidad
 FROM companyproducts cp
 JOIN companies co ON cp.company_id = co.id
@@ -137,7 +137,7 @@ JOIN citiesormunicipalities c ON co.city_id = c.code
 LEFT JOIN companyproducts cp ON co.id = cp.company_id
 WHERE cp.product_id IS NULL;
 
--- 19. Empresas con productos duplicados por nombre
+-- 19. Empresas con productos duplicados por nombre    revisar
 SELECT co.name AS empresa, p.name AS producto, COUNT(*) AS duplicados
 FROM companyproducts cp
 JOIN companies co ON cp.company_id = co.id
