@@ -269,3 +269,26 @@ RETURN (
 );
 $$
 DELIMITER ;
+
+-- comprobacion de las historias de usuario
+
+SELECT promedio_ponderado_calidad(1);
+SELECT es_calificacion_reciente(NOW());
+SELECT obtener_empresa_producto(1);
+SELECT tiene_membresia_activa(1);
+SELECT ciudad_supera_empresas('08001', 2);
+SELECT descripcion_calificacion(4.2);
+SELECT estado_producto(1);
+SELECT es_favorito(1, 1);
+SELECT beneficio_asignado_audiencia(1, 1);
+SELECT fecha_en_membresia(CURDATE(), 1);
+SELECT porcentaje_positivas(1);
+SELECT edad_calificacion(NOW());
+SELECT productos_por_empresa('9001');
+SELECT nivel_actividad_cliente(1);
+SELECT precio_promedio_ponderado(1);
+SELECT beneficio_mas_de_una(1);
+SELECT indice_variedad_ciudad('08001');
+SELECT desactivar_producto(1);
+SELECT indice_popularidad(1);
+SELECT codigo_unico_producto(1);

@@ -713,7 +713,7 @@ https://i.ibb.co/JwMnYkcr/DERPlat-Products.png
 
 ## 🔹 **6. Events (Eventos Programados..Usar procedimientos o funciones para cada evento)**
 
-1. ## 🔹 **1. Borrar productos sin actividad cada 6 meses**
+   ## 🔹 **1. Borrar productos sin actividad cada 6 meses**
 
    > **Historia:** Como administrador, quiero un evento que borre productos sin actividad cada 6 meses.
 
@@ -915,9 +915,9 @@ https://i.ibb.co/JwMnYkcr/DERPlat-Products.png
    ## 🔹 **20. Actualizar precios con índice externo**
 
    > **Historia:** Como administrador, deseo un evento que actualice precios según un índice referenciado.
-
+ 
    🧠 **Explicación:**
-    Se podría tener una tabla `inflacion_indice` y aplicar ese valor multiplicador a los precios de productos activos.
+   Se podría tener una tabla `inflacion_indice` y aplicar ese valor multiplicador a los precios de productos activos.
 
    
 

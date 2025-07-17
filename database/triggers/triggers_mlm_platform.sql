@@ -1,4 +1,11 @@
+-- error en los primeros 3 
+
+
 -- 1. Actualizar la fecha de modificación de un producto
+
+ALTER TABLE products ADD COLUMN updated_at DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+
 DELIMITER $$
 CREATE TRIGGER trg_update_product_updated_at
 BEFORE UPDATE ON products
@@ -9,6 +16,10 @@ END$$
 DELIMITER ;
 
 -- 2. Registrar log cuando un cliente califica un producto
+
+ALTER TABLE companies ADD COLUMN updated_at DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+
 CREATE TABLE IF NOT EXISTS log_acciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
     accion VARCHAR(100),
@@ -28,6 +39,10 @@ END$$
 DELIMITER ;
 
 -- 3. Impedir insertar productos sin unidad de medida
+
+ALTER TABLE audiences ADD COLUMN status VARCHAR(50) DEFAULT 'INACTIVA';
+
+
 DELIMITER $$
 CREATE TRIGGER trg_no_product_sin_unidad
 BEFORE INSERT ON products

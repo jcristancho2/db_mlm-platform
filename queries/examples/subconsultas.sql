@@ -101,7 +101,7 @@ JOIN products p ON df.product_id = p.id
 WHERE p.id NOT IN (
     SELECT product_id FROM companyproducts
 )
-AND f.customer_id = ?; -- Reemplaza ? por tu customer_id
+AND f.customer_id = 29;
 
 -- 11. Productos vendidos en empresas cuya ciudad tiene menos de tres empresas registradas
 SELECT p.name
@@ -147,7 +147,7 @@ WHERE EXISTS (
     JOIN pollproducts pp ON cr.poll_id = pp.poll_id
     WHERE pp.product_id = p.id AND cr.customer_id <> f.customer_id AND cr.rating > 4
 )
-AND f.customer_id = ?; -- Reemplaza ? por tu customer_id
+AND f.customer_id = 30;
 
 -- 16. Productos sin imagen asignada pero sí han sido calificados
 SELECT p.name

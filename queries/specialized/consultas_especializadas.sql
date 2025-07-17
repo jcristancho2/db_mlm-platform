@@ -92,21 +92,30 @@ JOIN companyproducts cp ON df.product_id = cp.product_id
 GROUP BY cu.id
 HAVING empresas_distintas > 1;
 
--- 13. Ciudades con más clientes activos    revisar adicionar mas clientes
+-- 13. Ciudades con más clientes activos    
 SELECT c.name AS ciudad, COUNT(cu.id) AS clientes_activos
 FROM citiesormunicipalities c
 JOIN customers cu ON cu.city_id = c.code
 GROUP BY c.code
 ORDER BY clientes_activos DESC;
 
--- 14. Ranking de productos por empresa basado en la media de quality_products    revisar
-SELECT co.name AS empresa, p.name AS producto, AVG(qp.quality_score) AS promedio_calidad
+-- 14. Ranking de productos por empresa basado en la media de quality_products   
+SELECT 
+  co.name AS empresa, p.name AS producto, AVG(
+    CASE LOWER(qp.quality_level)
+      WHEN 'alta' THEN 3
+      WHEN 'media' THEN 2
+      WHEN 'baja' THEN 1
+      ELSE NULL
+    END
+  ) AS promedio_calidad
 FROM companyproducts cp
 JOIN companies co ON cp.company_id = co.id
 JOIN products p ON cp.product_id = p.id
 JOIN quality_products qp ON qp.product_id = p.id
 GROUP BY co.id, p.id
 ORDER BY co.name, promedio_calidad DESC;
+
 
 -- 15. Empresas que ofrecen más de cinco productos distintos
 SELECT co.name AS empresa, COUNT(DISTINCT cp.product_id) AS productos_ofrecidos

@@ -1,3 +1,5 @@
+
+
 -- 1. Obtener el promedio de calificación por producto
 CREATE OR REPLACE VIEW promedio_calificacion_por_producto AS
 SELECT product_id, AVG(rating) AS promedio
@@ -129,4 +131,72 @@ JOIN rates r ON cp.product_id = r.product_id
 GROUP BY co.id, co.name
 ORDER BY productos_calificados DESC
 LIMIT 1;
+
+
+-- PARA COMPROBAR SI LAS FUNCIONES AGREGADAS ESTAN ALMACENADAS EN LA BASE DE DATOS 
+
+SHOW FULL TABLES IN mlm_platform WHERE TABLE_TYPE = 'VIEW';
+
+-- VISUALIZAR EL RESULTADO DE CADA FUNCION AGREGADA
+
+-- 1. Promedio de calificación por producto
+SELECT * FROM promedio_calificacion_por_producto;
+
+-- 2. Total de productos calificados por cliente
+SELECT * FROM productos_calificados_por_cliente;
+
+-- 3. Total de beneficios asignados por audiencia
+SELECT * FROM total_beneficios_por_audiencia;
+
+-- 4. Media de productos por empresa
+SELECT * FROM media_productos_por_empresa;
+
+-- 5. Total de empresas por ciudad
+SELECT * FROM total_empresas_por_ciudad;
+
+-- 6. Promedio de precios por unidad de medida
+SELECT * FROM promedio_precio_por_unidad;
+
+-- 7. Total de clientes por ciudad
+SELECT * FROM total_clientes_por_ciudad;
+
+-- 8. Total de planes de membresía por periodo
+SELECT * FROM planes_membresia_por_periodo;
+
+-- 9. Promedio de calificaciones a productos favoritos por cliente
+SELECT * FROM promedio_calificaciones_favoritos_cliente;
+
+-- 10. Fecha más reciente de calificación de cada producto
+SELECT * FROM fecha_ultima_calificacion_producto;
+
+-- 11. Desviación estándar del precio por categoría
+SELECT * FROM desviacion_precio_por_categoria;
+
+-- 12. Veces que un producto fue añadido como favorito
+SELECT * FROM veces_producto_favorito;
+
+-- 13. Porcentaje de productos evaluados
+SELECT * FROM porcentaje_productos_evaluados;
+
+-- 14. Promedio de rating por encuesta
+SELECT * FROM promedio_rating_por_encuesta;
+
+-- 15. Total de beneficios por plan de membresía
+SELECT * FROM promedio_total_beneficios_por_plan;
+
+-- 16. Media y varianza de precios por empresa
+SELECT * FROM media_varianza_precio_por_empresa;
+
+-- 17. Total de productos disponibles en la ciudad del cliente
+SELECT * FROM total_productos_por_ciudad_cliente;
+
+-- 18. Total de productos únicos por tipo de empresa
+SELECT * FROM productos_unicos_por_tipo_empresa;
+
+-- 19. Total de clientes sin email registrado
+SELECT * FROM total_clientes_sin_email;
+
+-- 20. Empresa con más productos calificados
+SELECT * FROM empresa_mas_productos_calificados;
+
 

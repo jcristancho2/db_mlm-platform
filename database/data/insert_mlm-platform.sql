@@ -2088,6 +2088,7 @@ VALUES
 (14, 22),
 (15, 35);
 
+
 -- products
 INSERT INTO products (id, name, detail, price, category_id, image)
 VALUES (
@@ -2112,7 +2113,7 @@ VALUES (
         'Silla de oficina con soporte lumbar ajustable y reposacabezas',
         289.00,
         3,
-        'image3.jpg'
+        ''
     ),
     (
         4,
@@ -2192,7 +2193,7 @@ VALUES (
         '1500W, vaso de tritán irrompible, programas preestablecidos',
         375.00,
         1,
-        'image13.jpg'
+        ''
     ),
     (
         14,
@@ -2224,7 +2225,7 @@ VALUES (
         'Impermeable, 20W de potencia, 15 horas de batería',
         135.75,
         2,
-        'image17.jpg'
+        ''
     ),
     (
         18,
@@ -2573,16 +2574,14 @@ VALUES (1, 1),
 INSERT INTO audiencebenefits (audience_id, benefit_id)
 VALUES (1, 4),
     (2, 4),
-    (3, 1),
-    (4, 4),
-    (5, 1),
-    (6, 1),
-    (7, 2),
-    (8, 2),
-    (9, 4),
-    (10, 2),
-    (11, 3),
-    (12, 2),
-    (13, 4),
-    (14, 3),
-    (15, 2);
+    (3, 1);
+
+
+INSERT INTO quality_products (product_id, customer_id, quality_level, quality_score)
+VALUES
+  (1, 101, 'alta', 4.5),
+  (1, 102, 'media', 3.5),
+  (2, 103, 'baja', 2.5),
+  (2, 104, 'media', 3.5),
+  (5, 105, 'alta', 4.5),
+  (5, 106, 'alta', 4.5);

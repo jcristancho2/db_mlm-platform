@@ -1,4 +1,3 @@
---------------------------------------------------------------------
 
 -- 1 registrar una nueva calificacion y actualziar el promedio
 
@@ -52,7 +51,6 @@ UNION ALL
 SELECT 'rates', product_id, customer_id, rating
 FROM rates WHERE product_id = 1;
 
---------------------------------------------------------------------
 
 -- 2 Insertar empresa y asociar productos por defecto
 
@@ -100,7 +98,6 @@ CALL insertar_empresa_y_asociar_productos_por_defecto(
 -- comprobacion de el procedimiento almacenado 2 
 SELECT * FROM companies WHERE id = 'CMP100';
 
---------------------------------------------------------------------
 
 -- 3. Añadir producto favorito validando duplicados
 
@@ -146,7 +143,6 @@ SELECT * FROM details_favorites WHERE favorite_id IN (
     SELECT id FROM favorites WHERE customer_id = 21 AND company_id = 'CMP019'
 );
 
---------------------------------------------------------------------
 
 -- 4. Generar resumen mensual de calificaciones por empresa
 
@@ -193,7 +189,6 @@ CALL generar_resumen_mensual_calificaciones();
 -- comprobacion de el procedimiento almacenado 4
 SELECT * FROM resumen_calificaciones WHERE mes = YEAR(CURDATE()) AND mes_numero = MONTH(CURDATE());
 
---------------------------------------------------------------------
 
 -- 5. Calcular beneficios activos por membresía
 
@@ -226,7 +221,6 @@ DELIMITER ;
 
 CALL beneficios_activos_por_membresia(1);
 
---------------------------------------------------------------------
 
 -- 6. Eliminar productos huérfanos
 DELIMITER $$
@@ -254,7 +248,6 @@ CALL eliminar_productos_huerfanos();
 
 SELECT * FROM products;
 
---------------------------------------------------------------------
 
 -- 7. Actualizar precios de productos por categoría
 DELIMITER $$
@@ -279,7 +272,6 @@ CALL actualizar_precios_por_categoria(2, 1.10);
 
 SELECT * FROM companyproducts WHERE product_id IN (SELECT id FROM products WHERE categoryid = 2);
 
---------------------------------------------------------------------
 
 -- 8. Validar inconsistencia entre rates y quality_products
 
@@ -333,7 +325,6 @@ CALL validar_inconsistencias_rates_quality();
 
 SELECT * FROM errores_log WHERE error_desc LIKE 'Rate sin quality_product%';
 
---------------------------------------------------------------------
 
 -- 9. Asignar beneficios a nuevas audiencias
 
@@ -356,7 +347,6 @@ CALL asignar_beneficio_audiencia(4, 3);
 -- comprobacion de el procedimiento almacenado 9
 SELECT * FROM audiencebenefits
 WHERE audience_id = 3 AND benefit_id = 4;
---------------------------------------------------------------------
 
 -- 10. Activar planes de membresía vencidos con pago confirmado
 
@@ -382,7 +372,6 @@ CALL activar_membresias_vencidas();
 -- Comprobación de el procedimiento almacenado 10 después de la llamada
 SELECT * FROM membershipperiods WHERE status = 'ACTIVA';
 
---------------------------------------------------------------------
 
 -- 11. Listar productos favoritos del cliente con su calificación
 DELIMITER $$
@@ -402,7 +391,6 @@ DELIMITER ;
 
 CALL favoritos_con_rating(21);
 
---------------------------------------------------------------------
 
 
 -- 12. Registrar encuesta y sus preguntas asociadas
@@ -488,7 +476,6 @@ SELECT * FROM favorites WHERE id = 900;
 SELECT * FROM details_favorites WHERE favorite_id = 900;
 
 
---------------------------------------------------------------------
 
 -- 14. Asociar beneficios automáticamente por audiencia
 DELIMITER $$
@@ -510,7 +497,6 @@ CALL asociar_beneficios_por_audiencia(2);
 -- Comprobación de el procedimiento almacenado 14
 SELECT * FROM audiencebenefits WHERE audience_id = 2;
 
---------------------------------------------------------------------
 
 -- 15. Historial de cambios de precio
 CREATE TABLE IF NOT EXISTS historial_precios (
@@ -549,7 +535,6 @@ CALL registrar_cambio_precio(1, 99.99);
 -- Verifica el historial de cambios de precio después de la llamada
 SELECT * FROM historial_precios WHERE product_id = 1 ORDER BY id DESC;
 
---------------------------------------------------------------------
 
 -- 16. Registrar encuesta activa automáticamente
 DELIMITER $$
@@ -571,7 +556,6 @@ CALL registrar_encuesta_activa('Encuesta Feedback General');
 
 SELECT * FROM polls;
 
---------------------------------------------------------------------
 
 -- 17. Actualizar unidad de medida de productos sin afectar ventas
 DELIMITER $$
@@ -597,7 +581,6 @@ CALL actualizar_unidad_si_no_ventas(1, 2);
 -- Comprobación de el procedimiento almacenado 17 después de la llamada
 SELECT id, name, unit_id FROM products LIMIT 10;
 
---------------------------------------------------------------------
 
 -- 18. Recalcular promedios de calidad semanalmente
 
@@ -620,7 +603,6 @@ CALL recalcular_promedios_calidad();
 -- comprobacion de el procedimiento almacenado 18 despues de la llamada
 SELECT id, average_rating FROM products;
 
---------------------------------------------------------------------
 
 -- 19. Validar claves foráneas entre calificaciones y encuestas
 
@@ -652,7 +634,6 @@ CALL validar_claves_rates_polls();
 SELECT * FROM errores_log;
 
 
---------------------------------------------------------------------
 
 -- 20. Generar el top 10 de productos más calificados por ciudad
 DELIMITER $$
@@ -672,205 +653,5 @@ DELIMITER ;
 
 -- Llamada del procedimiento almacenado 20
 
--- 12. Registrar encuesta y sus preguntas asociadas
--- Modificación necesaria:
---   - La columna 'title' y 'status' deben existir en 'polls'.
---   - 'poll_questions' debe estar creada con campos 'id', 'poll_id', 'question_text'.
-
-DELIMITER $$
-CREATE PROCEDURE registrar_encuesta_con_preguntas(
-    IN p_title VARCHAR(100),
-    IN p_questions_json JSON
-)
-BEGIN
-    DECLARE v_poll_id INT;
-    INSERT INTO polls (title, status, created_at) VALUES (p_title, 'activa', NOW());
-    SET v_poll_id = LAST_INSERT_ID();
-
-    SET @i = 0;
-    WHILE @i < JSON_LENGTH(p_questions_json) DO
-        INSERT INTO poll_questions (poll_id, question_text)
-        VALUES (
-            v_poll_id,
-            JSON_UNQUOTE(JSON_EXTRACT(p_questions_json, CONCAT('$[', @i, '].text')))
-        );
-        SET @i = @i + 1;
-    END WHILE;
-END$$
-DELIMITER ;
-
--- Llamada y comprobación
-CALL registrar_encuesta_con_preguntas('Encuesta Opinión Servicio', '[{"text":"¿Cómo califica la atención?"},{"text":"¿Qué mejorarías?"}]');
-SELECT * FROM polls ORDER BY id DESC LIMIT 1;
-SELECT * FROM poll_questions ORDER BY id DESC LIMIT 2;
-
-----------------------------------------------------------------------------------------
-
--- 13. Eliminar favoritos antiguos sin calificaciones
-DELIMITER $$
-CREATE PROCEDURE eliminar_favoritos_antiguos_sin_calificacion()
-BEGIN
-    DELETE df FROM details_favorites df
-    JOIN favorites f ON df.favorite_id = f.id
-    LEFT JOIN rates r ON df.product_id = r.product_id AND f.customer_id = r.customer_id
-    WHERE r.id IS NULL
-      AND f.created_at < DATE_SUB(CURDATE(), INTERVAL 12 MONTH);
-END$$
-DELIMITER ;
-
--- Comprobación antes y después
-SELECT * FROM details_favorites WHERE favorite_id IN (
-    SELECT id FROM favorites WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
-);
-CALL eliminar_favoritos_antiguos_sin_calificacion();
-SELECT * FROM details_favorites WHERE favorite_id IN (
-    SELECT id FROM favorites WHERE created_at < DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
-);
-
-----------------------------------------------------------------------------------------
-
--- 14. Asociar beneficios automáticamente por audiencia
-DELIMITER $$
-CREATE PROCEDURE asociar_beneficios_por_audiencia(IN p_audience_id INT)
-BEGIN
-    INSERT IGNORE INTO audiencebenefits (audience_id, benefit_id)
-    SELECT p_audience_id, b.id
-    FROM benefits b
-    WHERE NOT EXISTS (
-        SELECT 1 FROM audiencebenefits ab
-        WHERE ab.audience_id = p_audience_id AND ab.benefit_id = b.id
-    );
-END$$
-DELIMITER ;
-
--- Llamada y comprobación
-CALL asociar_beneficios_por_audiencia(2);
-SELECT * FROM audiencebenefits WHERE audience_id = 2;
-
-----------------------------------------------------------------------------------------
-
--- 15. Historial de cambios de precio
--- Requiere: tabla 'historial_precios' con campos: id, product_id, old_price, new_price, changed_at
-CREATE TABLE IF NOT EXISTS historial_precios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    product_id INT,
-    old_price DOUBLE,
-    new_price DOUBLE,
-    changed_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
-DELIMITER $$
-CREATE PROCEDURE registrar_cambio_precio(
-    IN p_product_id INT,
-    IN p_new_price DOUBLE
-)
-BEGIN
-    DECLARE v_old_price DOUBLE;
-    SELECT price INTO v_old_price FROM products WHERE id = p_product_id;
-
-    IF v_old_price <> p_new_price THEN
-        INSERT INTO historial_precios (product_id, old_price, new_price)
-        VALUES (p_product_id, v_old_price, p_new_price);
-        UPDATE products SET price = p_new_price WHERE id = p_product_id;
-    END IF;
-END$$
-DELIMITER ;
-
--- Llamada y comprobación
-CALL registrar_cambio_precio(1, 99.99);
-SELECT * FROM historial_precios ORDER BY id DESC LIMIT 1;
-
-----------------------------------------------------------------------------------------
-
--- 16. Registrar encuesta activa automáticamente
-DELIMITER $$
-CREATE PROCEDURE registrar_encuesta_activa(IN p_title VARCHAR(100))
-BEGIN
-    INSERT INTO polls (title, status, created_at)
-    VALUES (p_title, 'activa', NOW());
-END$$
-DELIMITER ;
-
--- Llamada y verificación
-CALL registrar_encuesta_activa('Encuesta Feedback General');
-SELECT * FROM polls ORDER BY id DESC LIMIT 1;
-
-----------------------------------------------------------------------------------------
-
--- 17. Actualizar unidad de medida de productos sin afectar ventas
-DELIMITER $$
-CREATE PROCEDURE actualizar_unidad_si_no_ventas(
-    IN p_product_id INT,
-    IN p_unit_id INT
-)
-BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM sales WHERE product_id = p_product_id
-    ) THEN
-        UPDATE products SET unit_id = p_unit_id WHERE id = p_product_id;
-    END IF;
-END$$
-DELIMITER ;
-
--- Llamada de ejemplo
-CALL actualizar_unidad_si_no_ventas(1, 2);
-SELECT id, unit_id FROM products WHERE id = 1;
-
-----------------------------------------------------------------------------------------
-
--- 18. Recalcular promedios de calidad semanalmente
-DELIMITER $$
-CREATE PROCEDURE recalcular_promedios_calidad()
-BEGIN
-    UPDATE products p
-    SET average_rating = (
-        SELECT AVG(r.rating) FROM rates r WHERE r.product_id = p.id
-    );
-END$$
-DELIMITER ;
-
--- Llamada y verificación
-CALL recalcular_promedios_calidad();
-SELECT id, average_rating FROM products;
-
-----------------------------------------------------------------------------------------
-
--- 19. Validar claves foráneas entre calificaciones y encuestas
--- Requiere: columna poll_id en rates (opcional) y existencia de polls
-DELIMITER $$
-CREATE PROCEDURE validar_claves_rates_polls()
-BEGIN
-    INSERT INTO errores_log (error_desc)
-    SELECT CONCAT('Rate con poll_id inexistente: rate_id=', r.id)
-    FROM rates r
-    LEFT JOIN polls p ON r.poll_id = p.id
-    WHERE r.poll_id IS NOT NULL AND p.id IS NULL;
-END$$
-DELIMITER ;
-
--- Llamada y comprobación
-CALL validar_claves_rates_polls();
-SELECT * FROM errores_log WHERE error_desc LIKE 'Rate con poll_id%';
-
---------------------------------------------------------------------
-
--- 20. Generar el top 10 de productos más calificados por ciudad
-DELIMITER $$
-CREATE PROCEDURE top10_productos_calificados_por_ciudad(IN p_city_code VARCHAR(6))
-BEGIN
-    SELECT p.id AS product_id, p.name, COUNT(r.id) AS total_calificaciones
-    FROM products p
-    JOIN companyproducts cp ON cp.product_id = p.id
-    JOIN companies c ON c.id = cp.company_id
-    JOIN rates r ON r.product_id = p.id
-    WHERE c.city_id = p_city_code
-    GROUP BY p.id, p.name
-    ORDER BY total_calificaciones DESC
-    LIMIT 10;
-END$$
-DELIMITER ;
-
--- Llamada y verificación
 CALL top10_productos_calificados_por_ciudad('11001');
 
---------------------------------------------------------------------
